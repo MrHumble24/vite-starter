@@ -1,0 +1,10 @@
+.sidebar-active {
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  color: white;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.main-shadow {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
