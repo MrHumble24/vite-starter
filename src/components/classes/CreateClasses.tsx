@@ -86,7 +86,7 @@ const CreateClasses: React.FC = () => {
                   <Select {...register("teacher")}>
                     <option value=''>Select teacher</option>
                     {data?.map((teacher) => (
-                      <option value={teacher.id}>
+                      <option key={teacher.id} value={teacher.id}>
                         {teacher.firstName} {teacher.lastName}
                       </option>
                     ))}
