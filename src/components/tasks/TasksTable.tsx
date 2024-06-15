@@ -1,4 +1,4 @@
-// ExamsTable.tsx
+// TasksTable.tsx
 import {
   Box,
   Table,
@@ -9,21 +9,21 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Exams } from "../../types/types";
-import EditExamsModal from "./EditExamsModal";
-import ClassesTableRow from "./ExamsTableRow";
+import { Tasks } from "../../types/types";
+import EditExamsModal from "./EditTasksModal";
+import ClassesTableRow from "./TasksTableRow";
 
-type ExamsTableProps = {
-  exams?: Exams[];
-  onEdit: (user: Exams) => void;
+type TasksTableProps = {
+  tasks?: Tasks[];
+  onEdit: (user: Tasks) => void;
 };
 
-const ExamsTable: React.FC<ExamsTableProps> = ({ exams }) => {
+const TasksTable: React.FC<TasksTableProps> = ({ tasks }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedUser, setSelectedUser] = useState<Exams | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Tasks | null>(null);
 
-  const handleEdit = (user: Exams) => {
-    setSelectedUser(user);
+  const handleEdit = (user: Tasks) => {
+    setSelectedTask(user);
     onOpen();
   };
 
@@ -33,13 +33,13 @@ const ExamsTable: React.FC<ExamsTableProps> = ({ exams }) => {
         <Thead>
           <Tr>
             <Th>Name</Th>
-            <Th>Scheduled</Th>
+            <Th>Deadline</Th>
             <Th>Class</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {exams?.map((c) => (
+          {tasks?.map((c) => (
             <ClassesTableRow onEdit={handleEdit} data={c} key={c.id} />
           ))}
         </Tbody>
@@ -48,10 +48,10 @@ const ExamsTable: React.FC<ExamsTableProps> = ({ exams }) => {
       <EditExamsModal
         isOpen={isOpen}
         onClose={onClose}
-        defaultValues={selectedUser}
+        defaultValues={selectedTask}
       />
     </Box>
   );
 };
 
-export default ExamsTable;
+export default TasksTable;

@@ -29,8 +29,8 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
   };
 
   return (
-    <Box overflow={"scroll"} maxW={"85vw"}>
-      <Table size={"sm"} variant='stripe'>
+    <Box overflow={"scroll"}>
+      <Table size={"sm"} variant='simple'>
         <Thead>
           <Tr>
             <Th>First Name</Th>
@@ -38,7 +38,7 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
             <Th>Username</Th>
             <Th>Password</Th>
             <Th>Class</Th>
-
+            <Th>Tasks</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>

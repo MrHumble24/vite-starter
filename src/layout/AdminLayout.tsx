@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar";
 import AdminSideBar from "../components/Sidebar";
 import usePreferenceStore from "../states/usePreferenceStore";
 import { Outlet } from "react-router-dom";
+import { MdOutlineTaskAlt } from "react-icons/md";
 const menuItems = [
   {
     label: "Teachers",
@@ -31,6 +32,11 @@ const menuItems = [
     path: "/admin/exams",
     icon: <PiExamBold />,
   },
+  {
+    label: "Tasks",
+    path: "/admin/tasks",
+    icon: <MdOutlineTaskAlt />,
+  },
 ];
 
 const AdminLayout = () => {
@@ -52,7 +58,7 @@ const AdminLayout = () => {
         >
           <AdminSideBar menuItems={menuItems} />
         </GridItem>
-        <GridItem className='main-shadow' minH={"100vh"}>
+        <GridItem overflow={"scroll"} className='main-shadow' minH={"100vh"}>
           <Box>
             <Outlet />
           </Box>

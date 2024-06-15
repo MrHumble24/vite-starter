@@ -29,8 +29,8 @@ const TeacherTable: React.FC<TeacherTableProps> = ({ users, onDelete }) => {
   };
 
   return (
-    <Box overflow={"scroll"} maxW={"85vw"}>
-      <Table size={"sm"} variant='stripe'>
+    <Box overflow={"scroll"}>
+      <Table size={"sm"} variant='simple'>
         <Thead>
           <Tr>
             <Th>First Name</Th>

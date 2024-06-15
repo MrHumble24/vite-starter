@@ -28,8 +28,8 @@ const ClassesTable: React.FC<ClassesTableProps> = ({ classes }) => {
   };
 
   return (
-    <Box overflow={"scroll"} maxW={"85vw"}>
-      <Table size={"sm"} variant='stripe'>
+    <Box overflow={"scroll"}>
+      <Table size={"sm"} variant='simple'>
         <Thead>
           <Tr>
             <Th>Name</Th>

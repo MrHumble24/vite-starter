@@ -55,3 +55,33 @@ export type Students = {
     teacher: number;
   } | null;
 };
+
+export type Tasks = {
+  class: number | null;
+  created_at: string;
+  deadline: string | null;
+  id: number;
+  name: string | null;
+  classes?: {
+    id: number;
+    name: string;
+    teacher: number;
+  } | null;
+};
+
+export type Assignments = {
+  created_at: string;
+  id: number;
+  isChecked: boolean | null;
+  isSubmitted: boolean | null;
+  studentID: number | null;
+  submittedTime: string | null;
+  taskID: number | null;
+  tasks?: Tasks | null;
+  students?: Students | null;
+  classes?: {
+    id: number;
+    name: string;
+    teacher: number;
+  } | null;
+};

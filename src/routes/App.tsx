@@ -7,24 +7,28 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageBox from "../components/PageBox";
 import ClassesTable from "../components/classes/ClassesTable";
+import CreateClasses from "../components/classes/CreateClasses";
+import CreateExam from "../components/exams/CreateExam";
 import ExamsTable from "../components/exams/ExamsTable";
+import CreateStudent from "../components/students/CreateStudent";
 import StudentsTable from "../components/students/StudentTable";
+import TasksTable from "../components/tasks/TasksTable";
+import CreateTeacher from "../components/teacher/CreateTeacher";
 import TeacherTable from "../components/teacher/TeacherTable";
 import { useClasses } from "../hooks/useClasses";
 import { useExams } from "../hooks/useExams";
 import { useStudents } from "../hooks/useStudents";
 import { useTeachers } from "../hooks/useTeachers";
 import AdminLayout from "../layout/AdminLayout";
-import CreateTeacher from "../components/teacher/CreateTeacher";
-import CreateClasses from "../components/classes/CreateClasses";
-import CreateStudent from "../components/students/CreateStudent";
-import CreateExam from "../components/exams/CreateExam";
+import { useTasks } from "../hooks/useTasks";
+import CreateTask from "../components/tasks/CreateTask";
 
 function App() {
   const { data: teachers } = useTeachers();
   const { data: classes } = useClasses();
   const { data: exams } = useExams();
   const { data: students } = useStudents();
+  const { data: tasks } = useTasks();
 
   return (
     <BrowserRouter>
@@ -89,6 +93,17 @@ function App() {
                 }
                 icon={<PiStudentBold />}
                 label='Students Page'
+              />
+            }
+          />
+          <Route
+            path='/admin/tasks'
+            element={
+              <PageBox
+                create={<CreateTask />}
+                content={<TasksTable onEdit={() => {}} tasks={tasks} />}
+                icon={<PiStudentBold />}
+                label='Tasks Page'
               />
             }
           />
