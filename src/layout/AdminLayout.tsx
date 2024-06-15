@@ -1,11 +1,14 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
+import {
+  PiChalkboardTeacherFill,
+  PiExamBold,
+  PiStudentBold,
+} from "react-icons/pi";
+import { SiGoogleclassroom } from "react-icons/si";
 import Navbar from "../components/Navbar";
-import usePreferenceStore from "../states/usePreferenceStore";
 import AdminSideBar from "../components/Sidebar";
-import { FaUserGroup } from "react-icons/fa6";
-import { GrHomeOption } from "react-icons/gr";
-import { MdOutlinePendingActions } from "react-icons/md";
-import { PiChalkboardTeacherFill, PiStudentBold } from "react-icons/pi";
+import usePreferenceStore from "../states/usePreferenceStore";
+import { Outlet } from "react-router-dom";
 const menuItems = [
   {
     label: "Teachers",
@@ -13,24 +16,20 @@ const menuItems = [
     icon: <PiChalkboardTeacherFill />,
   },
   {
-    label: "Rooms",
-    path: "/admin/rooms",
-    icon: <GrHomeOption />,
+    label: "Classes",
+    path: "/admin/classes",
+    icon: <SiGoogleclassroom />,
   },
-  {
-    label: "Groups",
-    path: "/admin/groups",
-    icon: <FaUserGroup />,
-  },
+
   {
     label: "Students",
     path: "/admin/students",
     icon: <PiStudentBold />,
   },
   {
-    label: "Leads",
-    path: "/admin/leads",
-    icon: <MdOutlinePendingActions />,
+    label: "Exams",
+    path: "/admin/exams",
+    icon: <PiExamBold />,
   },
 ];
 
@@ -54,7 +53,9 @@ const AdminLayout = () => {
           <AdminSideBar menuItems={menuItems} />
         </GridItem>
         <GridItem className='main-shadow' minH={"100vh"}>
-          <Box>Main</Box>
+          <Box>
+            <Outlet />
+          </Box>
         </GridItem>
       </Grid>
     </Box>
