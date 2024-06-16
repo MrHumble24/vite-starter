@@ -34,6 +34,7 @@ const CreateTask: React.FC = () => {
   const { register, handleSubmit, reset } = useForm<Tasks>();
 
   const submitForm = async (data: Tasks) => {
+    console.log(data);
     try {
       const { error, data: t } = await supabase
         .from("tasks")
@@ -48,12 +49,14 @@ const CreateTask: React.FC = () => {
       const taskId = t[0].id;
       console.log({ taskId });
       if (taskId) {
-        const assignedTask = students?.map((student) => {
-          return {
-            studentID: student.id,
-            taskID: taskId,
-          };
-        });
+        const assignedTask = students
+          ?.filter((s) => s.class == data.class)
+          .map((student) => {
+            return {
+              studentID: student.id,
+              taskID: taskId,
+            };
+          });
         console.log({ assignedTask });
         await supabase.from("assignments").insert(assignedTask).select();
       }
@@ -95,7 +98,7 @@ const CreateTask: React.FC = () => {
             <Box>
               <form onSubmit={handleSubmit(submitForm)}>
                 <FormControl>
-                  <FormLabel>Task</FormLabel>
+                  <FormLabel>Class</FormLabel>
                   <Select {...register("class")}>
                     <option value=''>Select Task</option>
                     {data?.map((item) => (

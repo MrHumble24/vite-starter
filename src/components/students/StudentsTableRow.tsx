@@ -24,7 +24,7 @@ const TeacherTableRow: React.FC<StudentsTableRowProps> = ({
       <Td>{user.password}</Td>
       <Td>{user.classes?.name}</Td>
       <Td>
-        <StudentTasks studentID={user.id}>
+        <StudentTasks studentID={user.id} studentObject={user}>
           <IconButton aria-label='Tasks' icon={<MdOutlineTaskAlt />} mr={2} />
         </StudentTasks>
       </Td>

@@ -22,17 +22,19 @@ import {
 import moment from "moment";
 import { useAssignments } from "../../hooks/useAssignments";
 import { supabase } from "../../api/supabase-client";
-import { Assignments } from "../../types/types";
+import { Assignments, Students } from "../../types/types";
 import { useQueryClient } from "@tanstack/react-query";
-import formatDateFromTimestamp from "../../utils/utils";
+
 import { ChangeEvent } from "react";
 
 function StudentTasks({
   children,
   studentID,
+  studentObject,
 }: {
   children: React.ReactNode;
   studentID: number;
+  studentObject: Students;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useAssignments();
@@ -89,7 +91,9 @@ function StudentTasks({
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader textAlign={"center"}>
+            {studentObject.firstName + " " + studentObject.lastName}'s Tasks
+          </DrawerHeader>
 
           <DrawerBody>
             <Box>

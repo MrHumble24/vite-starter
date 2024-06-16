@@ -85,3 +85,17 @@ export type Assignments = {
     teacher: number;
   } | null;
 };
+
+export type Marks = {
+  created_at: string;
+  exam: number | null;
+  id: number;
+  listening: number | null;
+  ordinaryMark: number | null;
+  reading: number | null;
+  speaking: number | null;
+  studentID: number | null;
+  writing: number | null;
+  students?: Students | null;
+  exams?: Exams | null;
+};
