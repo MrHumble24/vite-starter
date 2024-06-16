@@ -39,6 +39,7 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
             <Th>Password</Th>
             <Th>Class</Th>
             <Th>Tasks</Th>
+            <Th>Exams</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>

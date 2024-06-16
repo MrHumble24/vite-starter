@@ -37,6 +37,27 @@ export type Exams = {
     teacher: number;
   } | null;
 };
+export type ExamsStudent = {
+  class: number | null;
+  created_at: string;
+  id: number;
+  name: number | null;
+  scheduled: string | null;
+  regularMark: number;
+  listening: number;
+  reading: number;
+  writing: number;
+  speaking: number;
+  classes?: {
+    id: number;
+    name: string;
+    teacher: number;
+  } | null;
+  students?: Students | null;
+  exams?: Exams | null;
+  studentID: number;
+  examID: number;
+};
 export type Students = {
   age: string | null;
   class: number | null;

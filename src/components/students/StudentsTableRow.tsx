@@ -5,6 +5,8 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Students } from "../../types/types";
 import { MdOutlineTaskAlt } from "react-icons/md";
 import StudentTasks from "./StudentTasks";
+import { IoFolderOpenOutline } from "react-icons/io5";
+import StudentExams from "./StudentExams";
 type StudentsTableRowProps = {
   user: Students;
   onEdit: (user: Students) => void;
@@ -27,6 +29,15 @@ const TeacherTableRow: React.FC<StudentsTableRowProps> = ({
         <StudentTasks studentID={user.id} studentObject={user}>
           <IconButton aria-label='Tasks' icon={<MdOutlineTaskAlt />} mr={2} />
         </StudentTasks>
+      </Td>
+      <Td>
+        <StudentExams studentID={user.id} studentObject={user}>
+          <IconButton
+            aria-label='Exams'
+            icon={<IoFolderOpenOutline />}
+            mr={2}
+          />
+        </StudentExams>
       </Td>
 
       <Td>

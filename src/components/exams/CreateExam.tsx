@@ -22,17 +22,22 @@ import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 import { useClasses } from "../../hooks/useClasses";
 import { Exams } from "../../types/types";
+import { useStudents } from "../../hooks/useStudents";
 
 const CreateExam: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const { data: students } = useStudents();
   const queryClient = useQueryClient();
   const { data } = useClasses();
   const { register, handleSubmit, reset } = useForm<Exams>();
 
   const submitForm = async (data: Exams) => {
     try {
-      const { error } = await supabase.from("exams").insert([data]).select();
+      const { data: exam, error } = await supabase
+        .from("exams")
+        .insert([data])
+        .select();
 
       if (error) {
         throw new Error(error.message);
@@ -45,6 +50,22 @@ const CreateExam: React.FC = () => {
         duration: 3000,
         isClosable: true,
       });
+
+      console.log({
+        students: students?.filter((student) => student.class == data.class),
+        data,
+      });
+
+      const filteredData = students
+        ?.filter((student) => student.class == data.class)
+        .map((s) => ({ studentID: s.id, examID: exam[0].id }));
+
+      const { data: assigned, error: ex } = await supabase
+        .from("exam-student")
+        .insert(filteredData)
+        .select();
+
+      console.log({ assigned, ex });
 
       queryClient.invalidateQueries();
       onClose();
@@ -75,7 +96,7 @@ const CreateExam: React.FC = () => {
           <DrawerBody>
             <Box>
               <form onSubmit={handleSubmit(submitForm)}>
-                <FormControl>
+                <FormControl my={4}>
                   <FormLabel>Class</FormLabel>
                   <Select {...register("class")}>
                     <option value=''>Select Class</option>
@@ -86,11 +107,11 @@ const CreateExam: React.FC = () => {
                     ))}
                   </Select>
                 </FormControl>
-                <FormControl>
+                <FormControl my={4}>
                   <FormLabel>Name</FormLabel>
-                  <Input type='number' {...register("name")} />
+                  <Input type='text' {...register("name")} />
                 </FormControl>
-                <FormControl>
+                <FormControl my={4}>
                   <FormLabel>Scheduled Date</FormLabel>
                   <Input type='date' {...register("scheduled")} />
                 </FormControl>

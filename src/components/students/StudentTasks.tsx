@@ -83,7 +83,6 @@ function StudentTasks({
 
     qc.invalidateQueries();
   };
-  console.log(studentAssignments);
   return (
     <>
       <Box onClick={onOpen}>{children}</Box>
