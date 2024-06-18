@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -28,12 +28,12 @@ const CreateClasses: React.FC = () => {
   const { data } = useTeachers();
   const toast = useToast();
   const queryClient = useQueryClient();
-
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm<Classes>();
 
   const submitForm = async (data: Classes) => {
-    console.log(data);
     try {
+      setLoading(true);
       const { error } = await supabase.from("classes").insert([data]).select();
 
       if (error) {
@@ -60,6 +60,8 @@ const CreateClasses: React.FC = () => {
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,7 +94,12 @@ const CreateClasses: React.FC = () => {
                     ))}
                   </Select>
                 </FormControl>
-                <Button type='submit' colorScheme='blue' mt={4}>
+                <Button
+                  isLoading={loading}
+                  type='submit'
+                  colorScheme='blue'
+                  mt={4}
+                >
                   Submit
                 </Button>
               </form>

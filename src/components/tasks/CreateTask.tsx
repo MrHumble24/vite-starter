@@ -17,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 import { useClasses } from "../../hooks/useClasses";
@@ -30,12 +30,13 @@ const CreateTask: React.FC = () => {
   const queryClient = useQueryClient();
   const { data } = useClasses();
   const { data: students } = useStudents();
+  const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, reset } = useForm<Tasks>();
 
   const submitForm = async (data: Tasks) => {
-    console.log(data);
     try {
+      setLoading(true);
       const { error, data: t } = await supabase
         .from("tasks")
         .insert([data])
@@ -80,6 +81,8 @@ const CreateTask: React.FC = () => {
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,7 +120,12 @@ const CreateTask: React.FC = () => {
                   <Input type='date' {...register("deadline")} />
                 </FormControl>
 
-                <Button type='submit' colorScheme='blue' mt={4}>
+                <Button
+                  isLoading={loading}
+                  type='submit'
+                  colorScheme='blue'
+                  mt={4}
+                >
                   Submit
                 </Button>
               </form>

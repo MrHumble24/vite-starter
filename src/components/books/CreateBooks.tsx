@@ -17,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 
@@ -31,13 +31,15 @@ const CreateBooks: React.FC = () => {
   const { data: students } = useStudents();
   const toast = useToast();
   const queryClient = useQueryClient();
-
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm<BooksStudent>();
 
   const submitForm = async (data: BooksStudent) => {
     const formData = data;
     const readyData = { name: data.name, description: data.description };
+
     try {
+      setLoading(true);
       const { error, data: book } = await supabase
         .from("books")
         .insert([readyData])
@@ -80,6 +82,8 @@ const CreateBooks: React.FC = () => {
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -115,7 +119,12 @@ const CreateBooks: React.FC = () => {
                     ))}
                   </Select>
                 </FormControl>
-                <Button type='submit' colorScheme='blue' mt={4}>
+                <Button
+                  isLoading={loading}
+                  type='submit'
+                  colorScheme='blue'
+                  mt={4}
+                >
                   Submit
                 </Button>
               </form>

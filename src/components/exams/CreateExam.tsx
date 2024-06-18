@@ -17,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 import { useClasses } from "../../hooks/useClasses";
@@ -31,9 +31,11 @@ const CreateExam: React.FC = () => {
   const queryClient = useQueryClient();
   const { data } = useClasses();
   const { register, handleSubmit, reset } = useForm<Exams>();
+  const [loading, setLoading] = useState(false);
 
   const submitForm = async (data: Exams) => {
     try {
+      setLoading(true);
       const { data: exam, error } = await supabase
         .from("exams")
         .insert([data])
@@ -79,6 +81,8 @@ const CreateExam: React.FC = () => {
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -116,7 +120,12 @@ const CreateExam: React.FC = () => {
                   <Input type='date' {...register("scheduled")} />
                 </FormControl>
 
-                <Button type='submit' colorScheme='blue' mt={4}>
+                <Button
+                  isLoading={loading}
+                  type='submit'
+                  colorScheme='blue'
+                  mt={4}
+                >
                   Submit
                 </Button>
               </form>

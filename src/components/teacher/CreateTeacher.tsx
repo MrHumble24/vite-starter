@@ -19,6 +19,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 import { Teacher } from "../../types/types";
+import { useState } from "react";
 
 type TeacherFormProps = {
   defaultValues?: Teacher;
@@ -26,6 +27,7 @@ type TeacherFormProps = {
 
 const CreateTeacher: React.FC<TeacherFormProps> = ({ defaultValues }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [loading, setLoading] = useState(false);
 
   const toast = useToast();
   const queryClient = useQueryClient();
@@ -36,6 +38,7 @@ const CreateTeacher: React.FC<TeacherFormProps> = ({ defaultValues }) => {
 
   const submitForm = async (data: Teacher) => {
     try {
+      setLoading(true);
       const { error } = await supabase.from("teachers").insert([data]).select();
 
       if (error) {
@@ -62,6 +65,8 @@ const CreateTeacher: React.FC<TeacherFormProps> = ({ defaultValues }) => {
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,7 +79,7 @@ const CreateTeacher: React.FC<TeacherFormProps> = ({ defaultValues }) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Create Teacher account</DrawerHeader>
 
           <DrawerBody>
             <Box>
@@ -100,7 +105,12 @@ const CreateTeacher: React.FC<TeacherFormProps> = ({ defaultValues }) => {
                   <Input type='tel' {...register("phone")} />
                 </FormControl>
 
-                <Button type='submit' colorScheme='blue' mt={4}>
+                <Button
+                  isLoading={loading}
+                  type='submit'
+                  colorScheme='blue'
+                  mt={4}
+                >
                   Submit
                 </Button>
               </form>

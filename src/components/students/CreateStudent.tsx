@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -29,9 +29,11 @@ const CreateStudent: React.FC = () => {
   const queryClient = useQueryClient();
   const { data } = useClasses();
   const { register, handleSubmit, reset } = useForm<Students>();
+  const [loading, setLoading] = useState(false);
 
   const submitForm = async (data: Students) => {
     try {
+      setLoading(true);
       const { error } = await supabase.from("students").insert([data]).select();
 
       if (error) {
@@ -58,6 +60,8 @@ const CreateStudent: React.FC = () => {
         duration: 3000,
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -120,7 +124,12 @@ const CreateStudent: React.FC = () => {
                   <Input {...register("telegramUsername")} />
                 </FormControl>
 
-                <Button type='submit' colorScheme='blue' mt={4}>
+                <Button
+                  isLoading={loading}
+                  type='submit'
+                  colorScheme='blue'
+                  mt={4}
+                >
                   Submit
                 </Button>
               </form>
