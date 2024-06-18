@@ -1,0 +1,89 @@
+import { Skeleton, Stack } from "@chakra-ui/react";
+
+function TableSkeleton() {
+  return (
+    <Stack padding={4} spacing={1}>
+      <Skeleton height='50px'></Skeleton>
+      <Skeleton
+        height='50px'
+        bg='green.500'
+        color='white'
+        fadeDuration={1}
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        fadeDuration={4}
+        bg='blue.500'
+        color='white'
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        bg='green.500'
+        color='white'
+        fadeDuration={1}
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        fadeDuration={4}
+        bg='blue.500'
+        color='white'
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        bg='green.500'
+        color='white'
+        fadeDuration={1}
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        fadeDuration={4}
+        bg='blue.500'
+        color='white'
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        bg='green.500'
+        color='white'
+        fadeDuration={1}
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        fadeDuration={4}
+        bg='blue.500'
+        color='white'
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        bg='green.500'
+        color='white'
+        fadeDuration={1}
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        fadeDuration={4}
+        bg='blue.500'
+        color='white'
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        bg='green.500'
+        color='white'
+        fadeDuration={1}
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        fadeDuration={4}
+        bg='blue.500'
+        color='white'
+      ></Skeleton>
+      <Skeleton
+        height='50px'
+        bg='green.500'
+        color='white'
+        fadeDuration={1}
+      ></Skeleton>
+    </Stack>
+  );
+}
+
+export default TableSkeleton;

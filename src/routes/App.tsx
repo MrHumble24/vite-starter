@@ -26,14 +26,15 @@ import BooksTable from "../components/books/BooksTable";
 import CreateBooks from "../components/books/CreateBooks";
 import { useBooks } from "../hooks/useBooks";
 import { IoBookOutline } from "react-icons/io5";
+import TableSkeleton from "../components/skeletons/TableSkeleton";
 
 function App() {
-  const { data: teachers } = useTeachers();
-  const { data: classes } = useClasses();
-  const { data: exams } = useExams();
-  const { data: students } = useStudents();
-  const { data: tasks } = useTasks();
-  const { data: books } = useBooks();
+  const { data: teachers, isLoading: teachersLoading } = useTeachers();
+  const { data: classes, isLoading: classesLoading } = useClasses();
+  const { data: exams, isLoading: examsLoading } = useExams();
+  const { data: students, isLoading: studentsLoading } = useStudents();
+  const { data: tasks, isLoading: tasksLoading } = useTasks();
+  const { data: books, isLoading: booksLoading } = useBooks();
 
   return (
     <BrowserRouter>
@@ -45,11 +46,15 @@ function App() {
               <PageBox
                 create={<CreateBooks />}
                 content={
-                  <BooksTable
-                    // onDelete={() => {}}
-                    onEdit={() => {}}
-                    books={books}
-                  />
+                  booksLoading ? (
+                    <TableSkeleton />
+                  ) : (
+                    <BooksTable
+                      // onDelete={() => {}}
+                      onEdit={() => {}}
+                      books={books}
+                    />
+                  )
                 }
                 icon={<IoBookOutline />}
                 label='Books Page'
@@ -62,11 +67,11 @@ function App() {
               <PageBox
                 create={<CreateExam />}
                 content={
-                  <ExamsTable
-                    // onDelete={() => {}}
-                    onEdit={() => {}}
-                    exams={exams}
-                  />
+                  examsLoading ? (
+                    <TableSkeleton />
+                  ) : (
+                    <ExamsTable onEdit={() => {}} exams={exams} />
+                  )
                 }
                 icon={<PiExamBold />}
                 label='Exams Page'
@@ -79,11 +84,15 @@ function App() {
               <PageBox
                 create={<CreateTeacher />}
                 content={
-                  <TeacherTable
-                    onDelete={() => {}}
-                    onEdit={() => {}}
-                    users={teachers}
-                  />
+                  teachersLoading ? (
+                    <TableSkeleton />
+                  ) : (
+                    <TeacherTable
+                      onDelete={() => {}}
+                      onEdit={() => {}}
+                      users={teachers}
+                    />
+                  )
                 }
                 icon={<PiChalkboardTeacherFill />}
                 label='Teachers Page'
@@ -95,7 +104,13 @@ function App() {
             element={
               <PageBox
                 create={<CreateClasses />}
-                content={<ClassesTable onEdit={() => {}} classes={classes} />}
+                content={
+                  classesLoading ? (
+                    <TableSkeleton />
+                  ) : (
+                    <ClassesTable onEdit={() => {}} classes={classes} />
+                  )
+                }
                 icon={<SiGoogleclassroom />}
                 label='Classes Page'
               />
@@ -107,11 +122,15 @@ function App() {
               <PageBox
                 create={<CreateStudent />}
                 content={
-                  <StudentsTable
-                    onDelete={() => {}}
-                    onEdit={() => {}}
-                    students={students}
-                  />
+                  studentsLoading ? (
+                    <TableSkeleton />
+                  ) : (
+                    <StudentsTable
+                      onDelete={() => {}}
+                      onEdit={() => {}}
+                      students={students}
+                    />
+                  )
                 }
                 icon={<PiStudentBold />}
                 label='Students Page'
@@ -123,7 +142,13 @@ function App() {
             element={
               <PageBox
                 create={<CreateTask />}
-                content={<TasksTable onEdit={() => {}} tasks={tasks} />}
+                content={
+                  tasksLoading ? (
+                    <TableSkeleton />
+                  ) : (
+                    <TasksTable onEdit={() => {}} tasks={tasks} />
+                  )
+                }
                 icon={<PiStudentBold />}
                 label='Tasks Page'
               />
