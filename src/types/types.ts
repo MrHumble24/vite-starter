@@ -120,3 +120,23 @@ export type Marks = {
   students?: Students | null;
   exams?: Exams | null;
 };
+
+export type Books = {
+  id: number;
+  created_at: string;
+  name: string;
+  description: number;
+};
+
+export type BooksStudent = {
+  id: number;
+  created_at: string;
+  name: string;
+  description: number;
+  studentID: number;
+  bookID?: number;
+  classID?: number;
+  status: string;
+  books?: Books | null;
+  students?: Students | null;
+};

@@ -1,15 +1,18 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { MdOutlineTaskAlt } from "react-icons/md";
 import {
   PiChalkboardTeacherFill,
   PiExamBold,
   PiStudentBold,
 } from "react-icons/pi";
 import { SiGoogleclassroom } from "react-icons/si";
+import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import AdminSideBar from "../components/Sidebar";
 import usePreferenceStore from "../states/usePreferenceStore";
-import { Outlet } from "react-router-dom";
-import { MdOutlineTaskAlt } from "react-icons/md";
+
+import { IoBookOutline } from "react-icons/io5";
+
 const menuItems = [
   {
     label: "Teachers",
@@ -36,6 +39,11 @@ const menuItems = [
     label: "Tasks",
     path: "/admin/tasks",
     icon: <MdOutlineTaskAlt />,
+  },
+  {
+    label: "Books",
+    path: "/admin/books",
+    icon: <IoBookOutline />,
   },
 ];
 

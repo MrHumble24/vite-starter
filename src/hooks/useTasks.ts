@@ -4,7 +4,10 @@ import { supabase } from "../api/supabase-client";
 import { Tasks } from "../types/types";
 
 const fetchTasks = async () => {
-  const { data, error } = await supabase.from("tasks").select("*, classes(*)");
+  const { data, error } = await supabase
+    .from("tasks")
+    .select("*, classes(*)")
+    .order("created_at", { ascending: false });
   if (error) throw new Error(error.message);
   return data;
 };

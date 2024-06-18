@@ -1,12 +1,13 @@
 // TeacherTableRow.tsx
-import React from "react";
-import { Tr, Td, IconButton } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Students } from "../../types/types";
+import { IconButton, Td, Tr } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { IoBookOutline, IoFolderOpenOutline } from "react-icons/io5";
 import { MdOutlineTaskAlt } from "react-icons/md";
-import StudentTasks from "./StudentTasks";
-import { IoFolderOpenOutline } from "react-icons/io5";
+import { Students } from "../../types/types";
+import StudentBooks from "./StudentBooks";
 import StudentExams from "./StudentExams";
+import StudentTasks from "./StudentTasks";
 type StudentsTableRowProps = {
   user: Students;
   onEdit: (user: Students) => void;
@@ -18,12 +19,15 @@ const TeacherTableRow: React.FC<StudentsTableRowProps> = ({
   onEdit,
   onDelete,
 }) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   return (
     <Tr>
       <Td>{user.firstName}</Td>
       <Td>{user.lastName}</Td>
       <Td>{user.username}</Td>
-      <Td>{user.password}</Td>
+      <Td cursor={"help"} onClick={() => setPasswordVisible(!passwordVisible)}>
+        {passwordVisible ? user.password : "*********"}
+      </Td>
       <Td>{user.classes?.name}</Td>
       <Td>
         <StudentTasks studentID={user.id} studentObject={user}>
@@ -39,6 +43,11 @@ const TeacherTableRow: React.FC<StudentsTableRowProps> = ({
           />
         </StudentExams>
       </Td>
+      <Td>
+        <StudentBooks studentID={user.id} studentObject={user}>
+          <IconButton aria-label='Exams' icon={<IoBookOutline />} mr={2} />
+        </StudentBooks>
+      </Td>
 
       <Td>
         <IconButton
@@ -46,6 +55,7 @@ const TeacherTableRow: React.FC<StudentsTableRowProps> = ({
           icon={<EditIcon />}
           onClick={() => onEdit(user)}
           mr={2}
+          my={2}
         />
         <IconButton
           aria-label='Delete user'

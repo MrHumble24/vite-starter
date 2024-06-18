@@ -11,8 +11,9 @@ const PageBox = ({ label, icon, content, create }: IPageBoxProps) => {
   return (
     <Box maxH={"95vh"} overflow={"scroll"}>
       <Flex
-        alignItems={"center"}
+        alignItems={{ base: "start", md: "flex-start" }}
         gap={5}
+        flexDirection={{ base: "column", md: "row" }}
         justifyContent={"space-between"}
         p={3}
       >

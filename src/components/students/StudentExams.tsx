@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Checkbox,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -20,13 +19,12 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
-import moment from "moment";
-import { useAssignments } from "../../hooks/useAssignments";
-import { supabase } from "../../api/supabase-client";
-import { Assignments, Exams, Students } from "../../types/types";
 import { useQueryClient } from "@tanstack/react-query";
+import moment from "moment";
+import { supabase } from "../../api/supabase-client";
+import { Exams, Students } from "../../types/types";
 
-import { ChangeEvent, FocusEvent } from "react";
+import { FocusEvent } from "react";
 import { useExamsStudent } from "../../hooks/useExamsStudent";
 
 function StudentExams({
@@ -41,10 +39,9 @@ function StudentExams({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const qc = useQueryClient();
-  const { data: stex } = useExamsStudent();
-  console.log({ stex });
+  const { data: student_exams } = useExamsStudent();
 
-  const filtered = stex?.filter((e) => e.studentID == studentID);
+  const filtered = student_exams?.filter((e) => e.studentID == studentID);
 
   const handleAssessmentChange = async (
     event: FocusEvent<HTMLInputElement, Element>,

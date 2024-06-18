@@ -1,4 +1,4 @@
-// ClassesTable.tsx
+// BooksTable.tsx
 import {
   Box,
   Table,
@@ -9,21 +9,21 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Classes } from "../../types/types";
-import EditTeacherModal from "./EditClassesModal";
-import ClassesTableRow from "./ClassesTableRow";
+import { BooksStudent } from "../../types/types";
+import ClassesTableRow from "./BooksTableRow";
+import EditTeacherModal from "./EditBooksModal";
 
-type ClassesTableProps = {
-  classes?: Classes[];
-  onEdit: (user: Classes) => void;
+type BooksTableProps = {
+  books?: BooksStudent[];
+  onEdit: (book: BooksStudent) => void;
 };
 
-const ClassesTable: React.FC<ClassesTableProps> = ({ classes }) => {
+const BooksTable: React.FC<BooksTableProps> = ({ books }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedUser, setSelectedUser] = useState<Classes | null>(null);
+  const [selectedBook, setSelectedBook] = useState<BooksStudent | null>(null);
 
-  const handleEdit = (user: Classes) => {
-    setSelectedUser(user);
+  const handleEdit = (book: BooksStudent) => {
+    setSelectedBook(book);
     onOpen();
   };
 
@@ -33,12 +33,12 @@ const ClassesTable: React.FC<ClassesTableProps> = ({ classes }) => {
         <Thead>
           <Tr>
             <Th>Name</Th>
-            <Th>Teacher</Th>
+            <Th>Description</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {classes?.map((c) => (
+          {books?.map((c) => (
             <ClassesTableRow onEdit={handleEdit} data={c} key={c.id} />
           ))}
         </Tbody>
@@ -47,10 +47,10 @@ const ClassesTable: React.FC<ClassesTableProps> = ({ classes }) => {
       <EditTeacherModal
         isOpen={isOpen}
         onClose={onClose}
-        defaultValues={selectedUser}
+        defaultValues={selectedBook}
       />
     </Box>
   );
 };
 
-export default ClassesTable;
+export default BooksTable;

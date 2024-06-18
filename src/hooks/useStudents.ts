@@ -6,7 +6,8 @@ import { Students } from "../types/types";
 const fetchStudents = async () => {
   const { data, error } = await supabase
     .from("students")
-    .select("*, classes(*)");
+    .select("*, classes(*)")
+    .order("created_at", { ascending: false });
   if (error) throw new Error(error.message);
   return data;
 };

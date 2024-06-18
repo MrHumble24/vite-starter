@@ -40,6 +40,7 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
             <Th>Class</Th>
             <Th>Tasks</Th>
             <Th>Exams</Th>
+            <Th>Books</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
