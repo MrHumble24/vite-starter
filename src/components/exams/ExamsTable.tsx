@@ -65,7 +65,7 @@ const ExamsTable: React.FC<ExamsTableProps> = ({ exams }) => {
       <Box flexWrap={"wrap"} gap={4} display={"flex"} my={4}>
         {classesLoading && <Spinner />}
         <Select onChange={handleFilterClasses} maxW={300} size='sm'>
-          <option value='all'>Filter by All Teachers</option>
+          <option value='all'>Filter by All classes</option>
           {classes?.map((c) => (
             <option key={c.id} value={c.id}>
               class "{c?.name}" by {c?.teachers?.firstName}{" "}

@@ -36,7 +36,10 @@ const CreateBooks: React.FC = () => {
 
   const submitForm = async (data: BooksStudent) => {
     const formData = data;
-    const readyData = { name: data.name, description: data.description };
+    const readyData = {
+      name: data.name,
+      description: data.description,
+    };
 
     try {
       setLoading(true);
@@ -52,7 +55,11 @@ const CreateBooks: React.FC = () => {
       console.log(data);
       const filtered = students
         ?.filter((student) => student.class == formData.classID)
-        .map((student) => ({ studentID: student.id, bookID: book[0].id }));
+        .map((student) => ({
+          studentID: student.id,
+          bookID: book[0].id,
+          classID: data.classID,
+        }));
 
       // Show success toast
       console.log(filtered);

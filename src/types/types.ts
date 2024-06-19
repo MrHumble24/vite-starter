@@ -125,18 +125,19 @@ export type Books = {
   id: number;
   created_at: string;
   name: string;
-  description: number;
+  description: string;
 };
 
 export type BooksStudent = {
   id: number;
   created_at: string;
   name: string;
-  description: number;
+  description: string;
   studentID: number;
   bookID?: number;
   classID?: number;
   status: string;
   books?: Books | null;
   students?: Students | null;
+  classes?: Classes | null;
 };

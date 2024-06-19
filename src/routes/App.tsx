@@ -1,3 +1,4 @@
+import { IoBookOutline } from "react-icons/io5";
 import {
   PiChalkboardTeacherFill,
   PiExamBold,
@@ -6,27 +7,26 @@ import {
 import { SiGoogleclassroom } from "react-icons/si";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageBox from "../components/PageBox";
+import BooksTable from "../components/books/BooksTable";
+import CreateBooks from "../components/books/CreateBooks";
 import ClassesTable from "../components/classes/ClassesTable";
 import CreateClasses from "../components/classes/CreateClasses";
 import CreateExam from "../components/exams/CreateExam";
 import ExamsTable from "../components/exams/ExamsTable";
+import TableSkeleton from "../components/skeletons/TableSkeleton";
 import CreateStudent from "../components/students/CreateStudent";
 import StudentsTable from "../components/students/StudentTable";
+import CreateTask from "../components/tasks/CreateTask";
 import TasksTable from "../components/tasks/TasksTable";
 import CreateTeacher from "../components/teacher/CreateTeacher";
 import TeacherTable from "../components/teacher/TeacherTable";
+import { useBooksStudents } from "../hooks/useBooksStudents";
 import { useClasses } from "../hooks/useClasses";
 import { useExams } from "../hooks/useExams";
 import { useStudents } from "../hooks/useStudents";
+import { useTasks } from "../hooks/useTasks";
 import { useTeachers } from "../hooks/useTeachers";
 import AdminLayout from "../layout/AdminLayout";
-import { useTasks } from "../hooks/useTasks";
-import CreateTask from "../components/tasks/CreateTask";
-import BooksTable from "../components/books/BooksTable";
-import CreateBooks from "../components/books/CreateBooks";
-import { useBooks } from "../hooks/useBooks";
-import { IoBookOutline } from "react-icons/io5";
-import TableSkeleton from "../components/skeletons/TableSkeleton";
 
 function App() {
   const { data: teachers, isLoading: teachersLoading } = useTeachers();
@@ -34,7 +34,7 @@ function App() {
   const { data: exams, isLoading: examsLoading } = useExams();
   const { data: students, isLoading: studentsLoading } = useStudents();
   const { data: tasks, isLoading: tasksLoading } = useTasks();
-  const { data: books, isLoading: booksLoading } = useBooks();
+  const { data: books, isLoading: booksLoading } = useBooksStudents();
 
   return (
     <BrowserRouter>

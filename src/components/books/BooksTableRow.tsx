@@ -22,8 +22,9 @@ const BooksTableRow: React.FC<BooksRowProps> = ({ data, onEdit }) => {
   };
   return (
     <Tr>
-      <Td>{data.name}</Td>
-      <Td>{data.description}</Td>
+      <Td>{data?.books?.name}</Td>
+      <Td>{data?.books?.description}</Td>
+      <Td>{data?.classes?.name}</Td>
 
       <Td>
         <IconButton
