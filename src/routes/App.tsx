@@ -14,6 +14,7 @@ import CreateClasses from "../components/classes/CreateClasses";
 import CreateExam from "../components/exams/CreateExam";
 import ExamsTable from "../components/exams/ExamsTable";
 import TableSkeleton from "../components/skeletons/TableSkeleton";
+import TotalStat from "../components/statistics/total/TotalStat";
 import CreateStudent from "../components/students/CreateStudent";
 import StudentsTable from "../components/students/StudentTable";
 import CreateTask from "../components/tasks/CreateTask";
@@ -26,8 +27,9 @@ import { useExams } from "../hooks/useExams";
 import { useStudents } from "../hooks/useStudents";
 import { useTasks } from "../hooks/useTasks";
 import { useTeachers } from "../hooks/useTeachers";
+import useTotal from "../hooks/useTotal";
 import AdminLayout from "../layout/AdminLayout";
-
+import { FaChartPie } from "react-icons/fa6";
 function App() {
   const { data: teachers, isLoading: teachersLoading } = useTeachers();
   const { data: classes, isLoading: classesLoading } = useClasses();
@@ -35,7 +37,7 @@ function App() {
   const { data: students, isLoading: studentsLoading } = useStudents();
   const { data: tasks, isLoading: tasksLoading } = useTasks();
   const { data: books, isLoading: booksLoading } = useBooksStudents();
-
+  const total = useTotal();
   return (
     <BrowserRouter>
       <Routes>
@@ -151,6 +153,19 @@ function App() {
                 }
                 icon={<PiStudentBold />}
                 label='Tasks Page'
+              />
+            }
+          />
+
+          <Route
+            path='/admin/stats'
+            element={
+              <PageBox
+                content={
+                  tasksLoading ? <TableSkeleton /> : <TotalStat total={total} />
+                }
+                icon={<FaChartPie />}
+                label='Stats Page'
               />
             }
           />

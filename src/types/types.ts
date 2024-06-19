@@ -48,6 +48,7 @@ export type ExamsStudent = {
   reading: number;
   writing: number;
   speaking: number;
+  status: boolean;
   classes?: {
     id: number;
     name: string;

@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
   Button,
+  Center,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -9,6 +11,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Input,
+  Switch,
   Table,
   TableCaption,
   TableContainer,
@@ -22,7 +25,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
 import { supabase } from "../../api/supabase-client";
-import { Exams, Students } from "../../types/types";
+import { ExamsStudent, Students } from "../../types/types";
 
 import { FocusEvent } from "react";
 import { useExamsStudent } from "../../hooks/useExamsStudent";
@@ -42,10 +45,28 @@ function StudentExams({
   const { data: student_exams } = useExamsStudent();
 
   const filtered = student_exams?.filter((e) => e.studentID == studentID);
+  const handleStatusChange = async (event: any, exam: ExamsStudent) => {
+    try {
+      const { data, error } = await supabase
+        .from("exam-student")
+        .update({
+          status: Boolean(event.target.checked),
+        })
+        .eq("id", exam.id)
+        .select();
 
+      if (error) {
+        throw new Error(error.message);
+      }
+      console.log(data);
+      qc.invalidateQueries();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleAssessmentChange = async (
     event: FocusEvent<HTMLInputElement, Element>,
-    exam: Exams,
+    exam: ExamsStudent,
     type: string
   ) => {
     console.log("first");
@@ -92,6 +113,11 @@ function StudentExams({
                         Regular <br />
                         (non IELTS)
                       </Th>
+                      <Th textAlign={"center"}>
+                        Status
+                        <br />
+                        (Passed / Failed)
+                      </Th>
                       <Th>Listening</Th>
                       <Th>Reading</Th>
                       <Th>Writing</Th>
@@ -128,6 +154,18 @@ function StudentExams({
                               type='number'
                               htmlSize={4}
                             />
+                          </Td>
+                          <Td>
+                            <Center>
+                              <Switch
+                                isChecked={e.status}
+                                onChange={(event) =>
+                                  handleStatusChange(event, e)
+                                }
+                                colorScheme='teal'
+                                size='lg'
+                              />
+                            </Center>
                           </Td>
                           <Td>
                             <Input

@@ -10,7 +10,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import AdminSideBar from "../components/Sidebar";
 import usePreferenceStore from "../states/usePreferenceStore";
-
+import { FaChartPie } from "react-icons/fa";
 import { IoBookOutline } from "react-icons/io5";
 
 const menuItems = [
@@ -44,6 +44,11 @@ const menuItems = [
     label: "Books",
     path: "/admin/books",
     icon: <IoBookOutline />,
+  },
+  {
+    label: "Statistics",
+    path: "/admin/stats",
+    icon: <FaChartPie />,
   },
 ];
 
