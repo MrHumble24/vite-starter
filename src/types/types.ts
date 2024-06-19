@@ -29,7 +29,7 @@ export type Exams = {
   class: number | null;
   created_at: string;
   id: number;
-  name: number | null;
+  name: string | null;
   scheduled: string | null;
   classes?: {
     id: number;

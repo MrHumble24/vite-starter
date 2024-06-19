@@ -54,7 +54,7 @@ const TeacherTable: React.FC<TeacherTableProps> = ({ users, onDelete }) => {
           maxW={300}
           size='sm'
           onChange={handleSearchClasses}
-          placeholder='Search Students'
+          placeholder='Search Teachers'
           type='search'
         />
       </Box>

@@ -82,7 +82,7 @@ const ClassesTable: React.FC<ClassesTableProps> = ({ classes }) => {
           maxW={300}
           size='sm'
           onChange={handleSearchClasses}
-          placeholder='Search Students'
+          placeholder='Search Classes'
           type='search'
         />
       </Box>
