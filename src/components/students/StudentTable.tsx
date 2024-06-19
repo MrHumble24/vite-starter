@@ -52,7 +52,8 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
       const filteredStudents = students?.filter(
         (s) =>
           s?.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          s?.lastName?.toLowerCase().includes(searchTerm.toLowerCase())
+          s?.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          s.classes?.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setStudentList(filteredStudents);
     }
@@ -65,7 +66,7 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
 
   return (
     <>
-      <Box gap={4} display={"flex"} my={4}>
+      <Box flexWrap={"wrap"} gap={4} display={"flex"} my={4}>
         {classesLoading && <Spinner />}
         <Select onChange={handleFilterStudents} maxW={300} size='sm'>
           <option value='all'>Filter by All Classes</option>
