@@ -1,6 +1,7 @@
 // StudentsTable.tsx
 import {
   Box,
+  Input,
   Select,
   Spinner,
   Table,
@@ -26,6 +27,7 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<Students | null>(null);
   const { data: classes, isLoading: classesLoading } = useClasses();
+
   const [studentList, setStudentList] = useState<Students[] | undefined>(
     students
   );
@@ -42,6 +44,20 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
     }
   };
 
+  const handleSearchStudents = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value;
+    if (searchTerm === "") {
+      setStudentList(students);
+    } else {
+      const filteredStudents = students?.filter(
+        (s) =>
+          s?.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          s?.lastName?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setStudentList(filteredStudents);
+    }
+  };
+
   const handleEdit = (user: Students) => {
     setSelectedUser(user);
     onOpen();
@@ -49,7 +65,7 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
 
   return (
     <>
-      <Box my={4}>
+      <Box gap={4} display={"flex"} my={4}>
         {classesLoading && <Spinner />}
         <Select onChange={handleFilterStudents} maxW={300} size='sm'>
           <option value='all'>Filter by All Classes</option>
@@ -60,6 +76,13 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
             </option>
           ))}
         </Select>
+        <Input
+          maxW={300}
+          size='sm'
+          onChange={handleSearchStudents}
+          placeholder='Search Students'
+          type='search'
+        />
       </Box>
       <Box overflow={"scroll"}>
         <Table size={"sm"} variant='simple'>
