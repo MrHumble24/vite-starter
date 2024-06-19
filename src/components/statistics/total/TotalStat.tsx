@@ -33,7 +33,11 @@ const TotalStat = ({ total }: any) => {
 
   return (
     <Grid gap={5}>
-      <Grid gap={5} gridTemplateColumns={gridTemplateColumns}>
+      <Grid
+        alignSelf={"center"}
+        gap={5}
+        gridTemplateColumns={gridTemplateColumns}
+      >
         <TotalStatisticItem
           name={total.total.books > 1 ? "Books" : "Book"}
           quantity={total.total.books}
