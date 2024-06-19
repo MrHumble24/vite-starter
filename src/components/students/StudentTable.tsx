@@ -51,11 +51,12 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
     <>
       <Box my={4}>
         {classesLoading && <Spinner />}
-        <Select onChange={handleFilterStudents} maxW={200} size='sm'>
+        <Select onChange={handleFilterStudents} maxW={300} size='sm'>
           <option value='all'>Filter by All Classes</option>
           {classes?.map((c) => (
             <option key={c.id} value={c.id}>
-              {c.name}
+              Class "{c.name}" by {c?.teachers?.firstName}{" "}
+              {c?.teachers?.lastName}
             </option>
           ))}
         </Select>
