@@ -18,6 +18,6 @@ const fetchOneStudent = async (id: number) => {
 export const useGetStudent = (id: number) => {
   return useQuery<Students, Error>({
     queryFn: () => fetchOneStudent(id),
-    queryKey: ["students"],
+    queryKey: ["student-profile"],
   });
 };
