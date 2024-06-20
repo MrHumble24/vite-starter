@@ -22,6 +22,7 @@ import { Classes } from "../../types/types";
 import { supabase } from "../../api/supabase-client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTeachers } from "../../hooks/useTeachers";
+import { ReloadPage } from "../../utils/reload";
 
 const CreateClasses: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -49,6 +50,7 @@ const CreateClasses: React.FC = () => {
       });
 
       queryClient.invalidateQueries();
+      ReloadPage();
       onClose();
       reset();
     } catch (error: any) {

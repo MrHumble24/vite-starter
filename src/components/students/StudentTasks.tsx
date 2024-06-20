@@ -26,6 +26,7 @@ import { Assignments, Students } from "../../types/types";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { ChangeEvent } from "react";
+import { ReloadPage } from "../../utils/reload";
 
 function StudentTasks({
   children,
@@ -64,6 +65,7 @@ function StudentTasks({
     }
 
     qc.invalidateQueries();
+    ReloadPage();
   };
   const handleSubmitted = async (
     assignment: Assignments,

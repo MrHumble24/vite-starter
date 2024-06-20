@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { Teacher } from "../../types/types";
 import { supabase } from "../../api/supabase-client";
 import { useQueryClient } from "@tanstack/react-query";
+import { ReloadPage } from "../../utils/reload";
 
 type EditTeacherModalProps = {
   isOpen: boolean;
@@ -56,6 +57,7 @@ const EditTeacherModal: React.FC<EditTeacherModalProps> = ({
       if (error) throw error;
 
       queryClient.invalidateQueries();
+      ReloadPage();
 
       toast({
         title: "User updated.",

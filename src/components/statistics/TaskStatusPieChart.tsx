@@ -47,6 +47,7 @@ const TaskStatusPieChart: React.FC<TaskStatusPieChartProps> = ({ data }) => {
       borderColor={"grey.200"}
       boxShadow='sm'
       h={"100%"}
+      w={"100%"}
     >
       <Heading as='h3' size='lg' mb={4} textAlign='center'>
         Task Status Overview

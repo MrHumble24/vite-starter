@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 import { Tasks } from "../../types/types";
 import { useClasses } from "../../hooks/useClasses";
+import { ReloadPage } from "../../utils/reload";
 
 type EditTasksModalProps = {
   isOpen: boolean;
@@ -59,6 +60,7 @@ const EditTasksModal: React.FC<EditTasksModalProps> = ({
       if (error) throw error;
 
       queryClient.invalidateQueries();
+      ReloadPage();
 
       toast({
         title: "Task updated.",

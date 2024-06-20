@@ -5,6 +5,7 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Teacher } from "../../types/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { deleteRecord } from "../../helpers/deleteRecors";
+import { ReloadPage } from "../../utils/reload";
 
 type TeacherTableRowProps = {
   user: Teacher;
@@ -21,6 +22,7 @@ const TeacherTableRow: React.FC<TeacherTableRowProps> = ({ user, onEdit }) => {
     await deleteRecord({ table: "teachers", id: user.id });
     setIsWaiting(false);
     qc.invalidateQueries();
+    ReloadPage();
   };
   return (
     <Tr>

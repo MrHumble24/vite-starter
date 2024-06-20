@@ -29,6 +29,7 @@ import { ExamsStudent, Students } from "../../types/types";
 
 import { FocusEvent } from "react";
 import { useExamsStudent } from "../../hooks/useExamsStudent";
+import { ReloadPage } from "../../utils/reload";
 
 function StudentExams({
   children,
@@ -62,6 +63,7 @@ function StudentExams({
       }
       console.log(data);
       qc.invalidateQueries();
+      ReloadPage();
     } catch (error) {
       console.log(error);
     }

@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 import { Exams } from "../../types/types";
 import { useClasses } from "../../hooks/useClasses";
+import { ReloadPage } from "../../utils/reload";
 
 type EditExamsModalProps = {
   isOpen: boolean;
@@ -59,6 +60,7 @@ const EditExamsModal: React.FC<EditExamsModalProps> = ({
       if (error) throw error;
 
       queryClient.invalidateQueries();
+      ReloadPage();
 
       toast({
         title: "Exam updated.",

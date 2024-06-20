@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { BooksStudent } from "../../types/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { deleteRecord } from "../../helpers/deleteRecors";
+import { ReloadPage } from "../../utils/reload";
 
 type BooksRowProps = {
   data: BooksStudent;
@@ -19,6 +20,7 @@ const BooksTableRow: React.FC<BooksRowProps> = ({ data, onEdit }) => {
     await deleteRecord({ table: "books", id: data.id });
     setIsWaiting(false);
     qc.invalidateQueries();
+    ReloadPage();
   };
   return (
     <Tr>

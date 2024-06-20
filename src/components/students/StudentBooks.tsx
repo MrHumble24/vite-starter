@@ -25,6 +25,7 @@ import { Students } from "../../types/types";
 import { useBooksStudents } from "../../hooks/useBooksStudents";
 import { BOOK_READ_STATUS } from "../../constants/constants";
 import { supabase } from "../../api/supabase-client";
+import { ReloadPage } from "../../utils/reload";
 
 function StudentBooks({
   children,
@@ -57,6 +58,7 @@ function StudentBooks({
     }
 
     qc.invalidateQueries();
+    ReloadPage();
   };
 
   return (

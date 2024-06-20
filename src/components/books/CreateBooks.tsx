@@ -22,8 +22,8 @@ import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 
 import { useClasses } from "../../hooks/useClasses";
-import { BooksStudent } from "../../types/types";
 import { useStudents } from "../../hooks/useStudents";
+import { BooksStudent } from "../../types/types";
 
 const CreateBooks: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -78,6 +78,7 @@ const CreateBooks: React.FC = () => {
         isClosable: true,
       });
       queryClient.invalidateQueries();
+      // ReloadPage();
       onClose();
       reset();
     } catch (error: any) {

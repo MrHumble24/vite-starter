@@ -23,6 +23,7 @@ import { supabase } from "../../api/supabase-client";
 import { useClasses } from "../../hooks/useClasses";
 import { Exams } from "../../types/types";
 import { useStudents } from "../../hooks/useStudents";
+import { ReloadPage } from "../../utils/reload";
 
 const CreateExam: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -69,7 +70,9 @@ const CreateExam: React.FC = () => {
 
       console.log({ assigned, ex });
 
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries({ queryKey: ["exams"] });
+      queryClient.invalidateQueries({ queryKey: ["exam-student"] });
+      ReloadPage();
       onClose();
       reset();
     } catch (error: any) {

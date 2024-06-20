@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 import { useClasses } from "../../hooks/useClasses";
 import { BooksStudent } from "../../types/types";
+import { ReloadPage } from "../../utils/reload";
 
 type EditBooksModalProps = {
   isOpen: boolean;
@@ -60,6 +61,7 @@ const EditBooksModal: React.FC<EditBooksModalProps> = ({
       if (error) throw error;
 
       queryClient.invalidateQueries();
+      ReloadPage();
 
       toast({
         title: "Book updated.",

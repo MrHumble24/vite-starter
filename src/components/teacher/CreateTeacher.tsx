@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { supabase } from "../../api/supabase-client";
 import { Teacher } from "../../types/types";
 import { useState } from "react";
+import { ReloadPage } from "../../utils/reload";
 
 type TeacherFormProps = {
   defaultValues?: Teacher;
@@ -54,6 +55,7 @@ const CreateTeacher: React.FC<TeacherFormProps> = ({ defaultValues }) => {
       });
 
       queryClient.invalidateQueries();
+      ReloadPage();
       onClose();
       reset();
     } catch (error: any) {

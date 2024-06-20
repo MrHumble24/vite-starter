@@ -23,11 +23,15 @@ import StudentTasks from "../components/students/StudentTasks";
 import { useGetStudent } from "../hooks/student page related hooks/useStudent";
 import useTotal from "../hooks/useTotal";
 import { Students } from "../types/types";
+import useUserStore from "../hooks/login/useUserLogin";
 const StudentProfile: React.FC = () => {
   const info = useBreakpointValue({ base: false, md: true });
   const [isProfileVisible, setProfileVisible] = useState(info);
   const gridColumns = useBreakpointValue({ base: "1fr", md: "1fr 4fr" });
-  const { data: profileData, isLoading: isProfileLoading } = useGetStudent(26);
+  const user = useUserStore((u) => u.user);
+  const { data: profileData, isLoading: isProfileLoading } = useGetStudent(
+    user.id
+  );
   const total = useTotal();
 
   const filteredExamStats =

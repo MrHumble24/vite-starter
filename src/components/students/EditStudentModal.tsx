@@ -21,6 +21,7 @@ import { Students } from "../../types/types";
 import { supabase } from "../../api/supabase-client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useClasses } from "../../hooks/useClasses";
+import { ReloadPage } from "../../utils/reload";
 
 type EditStudentModalProps = {
   isOpen: boolean;
@@ -59,7 +60,7 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({
       if (error) throw error;
 
       queryClient.invalidateQueries();
-
+      ReloadPage();
       toast({
         title: "User updated.",
         status: "success",

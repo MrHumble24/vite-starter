@@ -23,6 +23,7 @@ import { supabase } from "../../api/supabase-client";
 import { useClasses } from "../../hooks/useClasses";
 import { Tasks } from "../../types/types";
 import { useStudents } from "../../hooks/useStudents";
+import { ReloadPage } from "../../utils/reload";
 
 const CreateTask: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -70,6 +71,7 @@ const CreateTask: React.FC = () => {
       });
 
       queryClient.invalidateQueries();
+      ReloadPage();
       onClose();
       reset();
     } catch (error: any) {

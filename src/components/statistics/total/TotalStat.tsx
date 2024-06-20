@@ -27,7 +27,7 @@ const TotalStat = ({ total }: any) => {
 
   const iconSize = useBreakpointValue({ base: 30, md: 50 });
 
-  const v = useBreakpointValue({ base: "1fr", md: "1fr 2fr" });
+  const v = useBreakpointValue({ base: "1fr", md: "2fr 2fr" });
   return (
     <Grid gap={5}>
       <Grid
@@ -67,11 +67,11 @@ const TotalStat = ({ total }: any) => {
         />
       </Grid>
       <Grid gap={3} gridTemplateColumns={v}>
-        <TaskStatusPieChart data={total.taskStatus} />
         <RegularMarksChart data={total.examStats} />
       </Grid>
 
       <StudentExamStatistics data={total.examStats} />
+      <TaskStatusPieChart data={total.taskStatus} />
     </Grid>
   );
 };
