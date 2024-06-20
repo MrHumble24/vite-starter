@@ -1,9 +1,4 @@
-import {
-  Box,
-  Heading,
-  useBreakpointValue,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Heading, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import {
   Cell,
@@ -13,15 +8,10 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-
-interface Task {
-  id: number;
-  isSubmitted: number;
-  isChecked: number;
-}
+import { Assignments } from "../../types/types";
 
 interface TaskStatusPieChartProps {
-  data: Task[];
+  data: Assignments[];
 }
 
 const TaskStatusPieChart: React.FC<TaskStatusPieChartProps> = ({ data }) => {
@@ -49,17 +39,14 @@ const TaskStatusPieChart: React.FC<TaskStatusPieChartProps> = ({ data }) => {
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-  const bgColor = useColorModeValue("white", "gray.800");
-  const borderColor = useColorModeValue("gray.200", "gray.600");
-
   return (
     <Box
-      bg={bgColor}
       p={3}
       borderRadius='md'
       borderWidth='1px'
-      borderColor={borderColor}
-      boxShadow='md'
+      borderColor={"grey.200"}
+      boxShadow='sm'
+      h={"100%"}
     >
       <Heading as='h3' size='lg' mb={4} textAlign='center'>
         Task Status Overview

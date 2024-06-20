@@ -30,6 +30,7 @@ import { useTeachers } from "../hooks/useTeachers";
 import useTotal from "../hooks/useTotal";
 import AdminLayout from "../layout/AdminLayout";
 import { FaChartPie } from "react-icons/fa6";
+import StudentProfile from "../layout/StudentLayout";
 function App() {
   const { data: teachers, isLoading: teachersLoading } = useTeachers();
   const { data: classes, isLoading: classesLoading } = useClasses();
@@ -38,6 +39,7 @@ function App() {
   const { data: tasks, isLoading: tasksLoading } = useTasks();
   const { data: books, isLoading: booksLoading } = useBooksStudents();
   const total = useTotal();
+
   return (
     <BrowserRouter>
       <Routes>
@@ -170,6 +172,7 @@ function App() {
             }
           />
         </Route>
+        <Route path='/student/page' element={<StudentProfile />} />
       </Routes>
     </BrowserRouter>
   );

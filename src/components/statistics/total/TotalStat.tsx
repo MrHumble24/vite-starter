@@ -8,6 +8,7 @@ import { SiGoogleclassroom } from "react-icons/si";
 import StudentExamStatistics from "../StudentExamStatistics";
 import TaskStatusPieChart from "../TaskStatusPieChart";
 import TotalStatisticItem from "./TotalStatisticItem";
+import RegularMarksChart from "../RegularMarksChart";
 export interface Total {
   books: number;
   students: number;
@@ -20,17 +21,13 @@ const TotalStat = ({ total }: any) => {
   console.log(total.total.books);
   const gridTemplateColumns = useBreakpointValue({
     base: "repeat(auto-fit, minmax(180px, 1fr))",
-    md: "repeat(auto-fit, minmax(200px, 1fr))",
-    lg: "repeat(auto-fit, minmax(200px, 1fr))",
+    md: "repeat(auto-fit, minmax(180px, 1fr))",
+    lg: "repeat(auto-fit, minmax(180px, 1fr))",
   });
-  const gridTemplateColumnsBig = useBreakpointValue({
-    base: "repeat(auto-fit, minmax(350px, 1fr))",
-    md: "repeat(auto-fit, minmax(200px, 1fr))",
-    lg: "repeat(auto-fit, minmax(250px, 1fr))",
-    xl: "2fr 3fr",
-  });
+
   const iconSize = useBreakpointValue({ base: 30, md: 50 });
 
+  const v = useBreakpointValue({ base: "1fr", md: "1fr 2fr" });
   return (
     <Grid gap={5}>
       <Grid
@@ -69,10 +66,12 @@ const TotalStat = ({ total }: any) => {
           icon={<MdOutlineTaskAlt size={iconSize} />}
         />
       </Grid>
-      <StudentExamStatistics data={total.examStats} />
-      <TaskStatusPieChart data={total.taskStatus} />
+      <Grid gap={3} gridTemplateColumns={v}>
+        <TaskStatusPieChart data={total.taskStatus} />
+        <RegularMarksChart data={total.examStats} />
+      </Grid>
 
-      <Grid gap={2} gridTemplateColumns={gridTemplateColumnsBig}></Grid>
+      <StudentExamStatistics data={total.examStats} />
     </Grid>
   );
 };

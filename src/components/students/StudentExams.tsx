@@ -97,7 +97,7 @@ function StudentExams({
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader textAlign={"center"}>
-            {studentObject.firstName + " " + studentObject.lastName}'s Exams
+            {studentObject?.firstName + " " + studentObject?.lastName}'s Exams
           </DrawerHeader>
 
           <DrawerBody>

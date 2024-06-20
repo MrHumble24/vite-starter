@@ -1,18 +1,25 @@
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  useBreakpointValue,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
 } from "recharts";
-import { Box, Heading, useColorModeValue, SimpleGrid } from "@chakra-ui/react";
 
 interface ExamRecord {
   id: number;
@@ -37,7 +44,7 @@ const StudentExamStatistics: React.FC<StudentExamStatisticsProps> = ({
   // Calculate average marks for each skill
   const totalMarks = { listening: 0, reading: 0, writing: 0, speaking: 0 };
   const count = data?.length;
-
+  const breakpoints = useBreakpointValue({ base: "1fr", md: "1fr 2fr" });
   data?.forEach((record) => {
     totalMarks.listening += record.listening;
     totalMarks.reading += record.reading;
@@ -46,10 +53,10 @@ const StudentExamStatistics: React.FC<StudentExamStatisticsProps> = ({
   });
 
   const averageMarks = {
-    listening: totalMarks.listening / count,
-    reading: totalMarks.reading / count,
-    writing: totalMarks.writing / count,
-    speaking: totalMarks.speaking / count,
+    listening: (totalMarks.listening / count).toFixed(1),
+    reading: (totalMarks.reading / count).toFixed(1),
+    writing: (totalMarks.writing / count).toFixed(1),
+    speaking: (totalMarks.speaking / count).toFixed(1),
   };
 
   const barChartData = [
@@ -85,51 +92,55 @@ const StudentExamStatistics: React.FC<StudentExamStatisticsProps> = ({
       <Heading as='h3' size='lg' mb={4} textAlign='center'>
         Student Exam Statistics
       </Heading>
-      <SimpleGrid columns={[1, null, 1]} spacing={10}>
-        <Box>
-          <Heading as='h4' size='md' mb={4} textAlign='center'>
-            Pass/Fail Ratio
-          </Heading>
-          <ResponsiveContainer width='100%' height={400}>
-            <PieChart>
-              <Pie
-                data={pieChartData}
-                dataKey='value'
-                nameKey='name'
-                cx='50%'
-                cy='50%'
-                outerRadius={150}
-                fill='#8884d8'
-                label
-              >
-                {pieChartData.map((_entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        </Box>
-        <Box>
-          <Heading as='h4' size='md' mb={4} textAlign='center'>
-            Average Marks by Skill
-          </Heading>
-          <ResponsiveContainer width='100%' height={400}>
-            <BarChart data={barChartData}>
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis dataKey='name' />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey='value' fill='#8884d8' />
-            </BarChart>
-          </ResponsiveContainer>
-        </Box>
-      </SimpleGrid>
+      <Grid gap={5} gridTemplateColumns={breakpoints}>
+        <GridItem borderRight={"1px solid black"}>
+          <Box>
+            <Heading as='h4' size='md' mb={4} textAlign='center'>
+              Pass/Fail Ratio
+            </Heading>
+            <ResponsiveContainer width='100%' height={400}>
+              <PieChart>
+                <Pie
+                  data={pieChartData}
+                  dataKey='value'
+                  nameKey='name'
+                  cx='50%'
+                  cy='50%'
+                  outerRadius={150}
+                  fill='#8884d8'
+                  label
+                >
+                  {pieChartData.map((_entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </Box>
+        </GridItem>
+        <GridItem>
+          <Box>
+            <Heading as='h4' size='md' mb={4} textAlign='center'>
+              Average Marks by Skill
+            </Heading>
+            <ResponsiveContainer width='100%' height={400}>
+              <BarChart data={barChartData}>
+                <CartesianGrid strokeDasharray='3 3' />
+                <XAxis dataKey='name' />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey='value' fill='#8884d8' />
+              </BarChart>
+            </ResponsiveContainer>
+          </Box>
+        </GridItem>
+      </Grid>
     </Box>
   );
 };

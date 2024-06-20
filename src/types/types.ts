@@ -63,6 +63,7 @@ export type Students = {
   age: string | null;
   class: number | null;
   created_at: string;
+  phone: string;
   dateEnrollment: string | null;
   failedAttempts: number | null;
   firstName: string | null;
