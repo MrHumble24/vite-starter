@@ -12,10 +12,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useClasses } from "../../hooks/useClasses";
 import { Students } from "../../types/types";
 import EditStudentModal from "./EditStudentModal";
 import TeacherTableRow from "./StudentsTableRow";
-import { useClasses } from "../../hooks/useClasses";
 
 type StudentTableProps = {
   students?: Students[];
@@ -25,9 +25,9 @@ type StudentTableProps = {
 
 const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [selectedUser, setSelectedUser] = useState<Students | null>(null);
   const { data: classes, isLoading: classesLoading } = useClasses();
-
   const [studentList, setStudentList] = useState<Students[] | undefined>(
     students
   );

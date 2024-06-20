@@ -18,6 +18,17 @@ export type Teacher = {
     | null;
 };
 
+export type Admins = {
+  id: string;
+  created_at: Date;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  role: string;
+};
+
 export type Classes = {
   id: number;
   created_at: string;
@@ -68,6 +79,7 @@ export type Students = {
   failedAttempts: number | null;
   firstName: string | null;
   id: number;
+  role: string | null;
   lastName: string | null;
   password: string | null;
   telegramUsername: string | null;
@@ -138,6 +150,7 @@ export type BooksStudent = {
   studentID: number;
   bookID?: number;
   classID?: number;
+  teacherID?: number;
   status: string;
   books?: Books | null;
   students?: Students | null;
