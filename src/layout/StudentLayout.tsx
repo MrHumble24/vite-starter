@@ -26,14 +26,6 @@ import StudentBooks from "../components/students/StudentBooks";
 import { Students } from "../types/types";
 import StudentTasks from "../components/students/StudentTasks";
 import StudentExams from "../components/students/StudentExams";
-// interface StudentProfileProps {
-//   name: string;
-//   studentID: number;
-//   email: string;
-//   profilePicture: string;
-//   status: string;
-//   examResults: Array<{ created_at: string; regularMark: number }>;
-// }
 
 const StudentProfile: React.FC = () => {
   const gridColumns = useBreakpointValue({ base: "1fr", md: "1fr 4fr" });
@@ -141,7 +133,10 @@ const StudentProfile: React.FC = () => {
 
             <TabPanels>
               <TabPanel>
-                <Grid gridTemplateColumns={"1fr 1fr"} gap={5}>
+                <Grid
+                  gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
+                  gap={5}
+                >
                   <GridItem>
                     <RegularMarksChart data={filteredExamStats} />
                   </GridItem>
