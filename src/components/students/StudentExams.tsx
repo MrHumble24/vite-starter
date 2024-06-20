@@ -34,10 +34,12 @@ function StudentExams({
   children,
   studentID,
   studentObject,
+  authorizedUser = true,
 }: {
   children: React.ReactNode;
   studentID: number;
   studentObject: Students;
+  authorizedUser: boolean;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -146,6 +148,7 @@ function StudentExams({
 
                           <Td>
                             <Input
+                              disabled={!authorizedUser}
                               textAlign={"center"}
                               onBlur={(event) =>
                                 handleAssessmentChange(event, e, "regularMark")
@@ -159,6 +162,7 @@ function StudentExams({
                             <Center>
                               <Switch
                                 isChecked={e.status}
+                                disabled={!authorizedUser}
                                 onChange={(event) =>
                                   handleStatusChange(event, e)
                                 }
@@ -170,6 +174,7 @@ function StudentExams({
                           <Td>
                             <Input
                               textAlign={"center"}
+                              disabled={!authorizedUser}
                               defaultValue={e.listening}
                               type='number'
                               htmlSize={4}
@@ -181,6 +186,7 @@ function StudentExams({
                           <Td>
                             <Input
                               textAlign={"center"}
+                              disabled={!authorizedUser}
                               defaultValue={e.reading}
                               onBlur={(event) =>
                                 handleAssessmentChange(event, e, "reading")
@@ -193,6 +199,7 @@ function StudentExams({
                             <Input
                               textAlign={"center"}
                               defaultValue={e.writing}
+                              disabled={!authorizedUser}
                               type='number'
                               onBlur={(event) =>
                                 handleAssessmentChange(event, e, "writing")
@@ -204,6 +211,7 @@ function StudentExams({
                             <Input
                               textAlign={"center"}
                               defaultValue={e.speaking}
+                              disabled={!authorizedUser}
                               type='number'
                               onBlur={(event) =>
                                 handleAssessmentChange(event, e, "speaking")

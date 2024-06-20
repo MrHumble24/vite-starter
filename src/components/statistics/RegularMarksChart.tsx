@@ -1,5 +1,5 @@
 // RegularMarksChart.tsx
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -59,9 +59,12 @@ const RegularMarksChart: React.FC<Props> = ({ data }) => {
       p={2}
       width='100%'
       mx='auto'
-      maxWidth='800px'
       minH={"500px"}
     >
+      <Heading textAlign={"center"} my={10} fontSize='lg' mb={3}>
+        {" "}
+        Regular Marks{" "}
+      </Heading>
       <Box my={"auto"}>
         <Line data={chartData} />
       </Box>

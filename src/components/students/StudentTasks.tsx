@@ -31,10 +31,12 @@ function StudentTasks({
   children,
   studentID,
   studentObject,
+  authorizedUser = true,
 }: {
   children: React.ReactNode;
   studentID: number;
   studentObject: Students;
+  authorizedUser: boolean;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useAssignments();
@@ -124,6 +126,7 @@ function StudentTasks({
                         </Td>
                         <Td>
                           <Checkbox
+                            disabled={!authorizedUser}
                             onChange={(event) =>
                               handleChecked(assignment, event)
                             }

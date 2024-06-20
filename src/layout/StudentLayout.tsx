@@ -24,10 +24,12 @@ import { useGetStudent } from "../hooks/student page related hooks/useStudent";
 import useTotal from "../hooks/useTotal";
 import { Students } from "../types/types";
 const StudentProfile: React.FC = () => {
-  const [isProfileVisible, setProfileVisible] = useState(false);
+  const info = useBreakpointValue({ base: false, md: true });
+  const [isProfileVisible, setProfileVisible] = useState(info);
   const gridColumns = useBreakpointValue({ base: "1fr", md: "1fr 4fr" });
   const { data: profileData, isLoading: isProfileLoading } = useGetStudent(26);
   const total = useTotal();
+
   const filteredExamStats =
     total.examStats?.filter((exam) => exam.studentID === profileData?.id) || [];
   const filteredTaskStats =
@@ -73,7 +75,39 @@ const StudentProfile: React.FC = () => {
             See Profile info
           </Button>
           {isProfileVisible && <Divider my={5} />}
-
+          <Flex
+            display={{ base: "none", md: "flex" }}
+            my={5}
+            justifyContent={"space-evenly"}
+            gap={3}
+          >
+            <StudentBooks
+              studentObject={profileData as Students}
+              studentID={Number(profileData?.id)}
+            >
+              <Button variant={"outline"} colorScheme='red' rounded={"full"}>
+                Books
+              </Button>
+            </StudentBooks>
+            <StudentTasks
+              authorizedUser={false}
+              studentObject={profileData as Students}
+              studentID={Number(profileData?.id)}
+            >
+              <Button variant={"outline"} colorScheme='blue' rounded={"full"}>
+                Tasks
+              </Button>
+            </StudentTasks>
+            <StudentExams
+              authorizedUser={false}
+              studentObject={profileData as Students}
+              studentID={Number(profileData?.id)}
+            >
+              <Button variant={"outline"} colorScheme='black' rounded={"full"}>
+                Exams
+              </Button>
+            </StudentExams>
+          </Flex>
           {isProfileVisible && (
             <Box mx={"auto"}>
               <Text boxShadow={"sm"} p={3} my={3} fontSize='lg'>
@@ -93,6 +127,8 @@ const StudentProfile: React.FC = () => {
         </GridItem>
         <GridItem display={{ base: "none", md: "block" }}>
           <Box>
+            <StudentExamStatistics data={filteredExamStats || []} />
+            <br />
             <Grid gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={5}>
               <GridItem>
                 <RegularMarksChart data={filteredExamStats} />
@@ -102,7 +138,6 @@ const StudentProfile: React.FC = () => {
               </GridItem>
             </Grid>
             <br />
-            <StudentExamStatistics data={filteredExamStats || []} />
           </Box>
         </GridItem>
         <GridItem display={{ base: "block", md: "none" }}>
@@ -116,6 +151,7 @@ const StudentProfile: React.FC = () => {
               </Button>
             </StudentBooks>
             <StudentTasks
+              authorizedUser={false}
               studentObject={profileData as Students}
               studentID={Number(profileData?.id)}
             >
@@ -124,6 +160,7 @@ const StudentProfile: React.FC = () => {
               </Button>
             </StudentTasks>
             <StudentExams
+              authorizedUser={false}
               studentObject={profileData as Students}
               studentID={Number(profileData?.id)}
             >
