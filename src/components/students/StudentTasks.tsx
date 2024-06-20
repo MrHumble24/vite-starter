@@ -36,7 +36,7 @@ function StudentTasks({
   children: React.ReactNode;
   studentID: number;
   studentObject: Students;
-  authorizedUser: boolean;
+  authorizedUser?: boolean;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useAssignments();

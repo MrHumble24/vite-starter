@@ -39,7 +39,7 @@ function StudentExams({
   children: React.ReactNode;
   studentID: number;
   studentObject: Students;
-  authorizedUser: boolean;
+  authorizedUser?: boolean;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
