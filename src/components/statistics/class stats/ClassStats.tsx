@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import useTotal from "../../../hooks/useTotal";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import TotalStat from "../total/TotalStat";
 import { useEffect, useState } from "react";
 
 const ClassStats = () => {
   const params = useParams();
   const { examStats, taskStatus, total } = useTotal();
-  console.log(examStats, taskStatus);
+
   const filteredExamsStatus = examStats?.filter(
     (e) => e.students?.class == params.classID
   );
@@ -27,10 +27,16 @@ const ClassStats = () => {
       taskStatus: filteredTaskStatus,
     });
   }, []);
-  console.log(data);
+
+  const classData = useLocation().state;
+  console.log({ classData });
   return (
     <Box>
-      ClassStats {params?.classID}
+      <Text my={4} fontWeight={"bold"}>
+        Stats for {classData?.class?.name} class [{" "}
+        {classData?.class?.teachers?.firstName}{" "}
+        {classData?.class?.teachers?.lastName}]
+      </Text>
       <TotalStat total={data} />
     </Box>
   );

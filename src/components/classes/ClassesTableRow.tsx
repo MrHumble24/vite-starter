@@ -30,7 +30,7 @@ const ClassesTableRow: React.FC<TableRowProps> = ({ data, onEdit }) => {
         {data.teachers?.firstName} {data?.teachers?.lastName}
       </Td>
       <Td>
-        <Link to={`/admin/classes/stats/${data.id}`}>
+        <Link to={`/admin/classes/stats/${data.id}`} state={{ class: data }}>
           <IconButton
             aria-label='Edit class'
             icon={<MdOutlineQueryStats />}
