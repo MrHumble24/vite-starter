@@ -27,12 +27,14 @@ type EditStudentModalProps = {
   isOpen: boolean;
   onClose: () => void;
   defaultValues: Students | null;
+  isAuthorized?: boolean;
 };
 
 const EditStudentModal: React.FC<EditStudentModalProps> = ({
   isOpen,
   onClose,
   defaultValues,
+  isAuthorized = true,
 }) => {
   const { register, handleSubmit, reset } = useForm<Students>({
     defaultValues: defaultValues || {},
@@ -100,17 +102,20 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({
               <FormLabel>Date of Birth</FormLabel>
               <Input type='date' {...register("age")} />
             </FormControl>
-            <FormControl>
-              <FormLabel>Class</FormLabel>
-              <Select {...register("class")}>
-                <option value=''>Select Class</option>
-                {data?.map((item) => (
-                  <option value={item.id} key={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
+            {isAuthorized && (
+              <FormControl>
+                <FormLabel>Class</FormLabel>
+                <Select {...register("class")}>
+                  <option value=''>Select Class</option>
+                  {data?.map((item) => (
+                    <option value={item.id} key={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
+
             <FormControl>
               <FormLabel>Telegram Username</FormLabel>
               <Input {...register("telegramUsername")} />

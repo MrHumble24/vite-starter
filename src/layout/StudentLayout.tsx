@@ -24,7 +24,9 @@ import { useGetStudent } from "../hooks/student page related hooks/useStudent";
 import useTotal from "../hooks/useTotal";
 import { Students } from "../types/types";
 import useUserStore from "../hooks/login/useUserLogin";
+import EditStudentModal from "../components/students/EditStudentModal";
 const StudentProfile: React.FC = () => {
+  const [isEditOpen, setEditOpen] = useState(false);
   const info = useBreakpointValue({ base: false, md: true });
   const [isProfileVisible, setProfileVisible] = useState(info);
   const gridColumns = useBreakpointValue({ base: "1fr", md: "1fr 4fr" });
@@ -78,6 +80,23 @@ const StudentProfile: React.FC = () => {
           >
             See Profile info
           </Button>
+          <Button
+            onClick={() => {
+              setEditOpen(!isEditOpen);
+            }}
+            variant={"ghost"}
+            size={"xs"}
+          >
+            Edit Profile
+          </Button>
+          <EditStudentModal
+            onClose={() => {
+              setEditOpen(false);
+            }}
+            isAuthorized={false}
+            isOpen={isEditOpen}
+            defaultValues={profileData as Students}
+          />
           {isProfileVisible && <Divider my={5} />}
           <Flex
             display={{ base: "none", md: "flex" }}
