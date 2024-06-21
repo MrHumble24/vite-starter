@@ -120,6 +120,10 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({
               <Input {...register("username")} />
             </FormControl>
 
+            <FormControl>
+              <FormLabel>Password</FormLabel>
+              <Input {...register("password")} />
+            </FormControl>
             <Button type='submit' colorScheme='blue' mt={4}>
               Save
             </Button>
