@@ -92,6 +92,7 @@ const ClassesTable: React.FC<ClassesTableProps> = ({ classes }) => {
             <Tr>
               <Th>Name</Th>
               <Th>Teacher</Th>
+              <Th>Stats</Th>
               <Th>Actions</Th>
             </Tr>
           </Thead>

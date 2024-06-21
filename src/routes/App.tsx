@@ -34,6 +34,8 @@ import useTotal from "../hooks/useTotal";
 import AdminLayout from "../layout/AdminLayout";
 import LoginLayout from "../layout/LoginLayout";
 import StudentProfile from "../layout/StudentLayout";
+import ClassStats from "../components/statistics/class stats/ClassStats";
+import { MdOutlineQueryStats } from "react-icons/md";
 function App() {
   const { data: teachers, isLoading: teachersLoading } = useTeachers();
   const { data: classes, isLoading: classesLoading } = useClasses();
@@ -69,11 +71,7 @@ function App() {
                   booksLoading ? (
                     <TableSkeleton />
                   ) : (
-                    <BooksTable
-                      // onDelete={() => {}}
-                      onEdit={() => {}}
-                      books={books}
-                    />
+                    <BooksTable onEdit={() => {}} books={books} />
                   )
                 }
                 icon={<IoBookOutline />}
@@ -133,6 +131,17 @@ function App() {
                 }
                 icon={<SiGoogleclassroom />}
                 label='Classes Page'
+              />
+            }
+          />
+          <Route
+            path='/admin/classes/stats/:classID'
+            element={
+              <PageBox
+                create={<CreateClasses />}
+                content={<ClassStats />}
+                icon={<MdOutlineQueryStats />}
+                label='Statistics'
               />
             }
           />

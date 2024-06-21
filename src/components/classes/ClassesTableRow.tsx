@@ -6,7 +6,8 @@ import { Classes } from "../../types/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { deleteRecord } from "../../helpers/deleteRecors";
 import { ReloadPage } from "../../utils/reload";
-
+import { Link } from "react-router-dom";
+import { MdOutlineQueryStats } from "react-icons/md";
 type TableRowProps = {
   data: Classes;
   onEdit: (data: Classes) => void;
@@ -28,7 +29,16 @@ const ClassesTableRow: React.FC<TableRowProps> = ({ data, onEdit }) => {
       <Td>
         {data.teachers?.firstName} {data?.teachers?.lastName}
       </Td>
-
+      <Td>
+        <Link to={`/admin/classes/stats/${data.id}`}>
+          <IconButton
+            aria-label='Edit class'
+            icon={<MdOutlineQueryStats />}
+            mr={2}
+            my={2}
+          />
+        </Link>
+      </Td>
       <Td>
         <IconButton
           aria-label='Edit class'
