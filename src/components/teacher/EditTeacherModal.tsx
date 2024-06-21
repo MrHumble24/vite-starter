@@ -99,6 +99,10 @@ const EditTeacherModal: React.FC<EditTeacherModalProps> = ({
               <Input {...register("username")} />
             </FormControl>
             <FormControl>
+              <FormLabel>Password</FormLabel>
+              <Input {...register("password")} />
+            </FormControl>
+            <FormControl>
               <FormLabel>Role</FormLabel>
               <Input {...register("role")} />
             </FormControl>
