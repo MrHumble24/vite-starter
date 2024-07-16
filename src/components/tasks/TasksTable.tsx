@@ -78,7 +78,10 @@ const TasksTable: React.FC<TasksTableProps> = ({ tasks }) => {
 				>
 					<option value='all'>Filter by All Classes</option>
 					{classes
-						?.filter((c) => c.teacher === user?.id)
+						?.filter((c) => {
+							if (user.admin) return true;
+							return c.teacher === user?.id;
+						})
 						?.map((c) => (
 							<option
 								key={c.id}

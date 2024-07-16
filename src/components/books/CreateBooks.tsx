@@ -130,7 +130,10 @@ const CreateBooks: React.FC = () => {
 									<Select {...register("classID")}>
 										<option value=''>Select Class</option>
 										{data
-											?.filter((c) => c.teacher === user?.id)
+											?.filter((c) => {
+												if (user.admin) return true;
+												return c.teacher === user?.id;
+											})
 											?.map((c) => (
 												<option
 													key={c.id}

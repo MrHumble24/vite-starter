@@ -83,7 +83,10 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
 				>
 					<option value='all'>Filter by All Classes</option>
 					{classes
-						?.filter((c) => c.teacher === user?.id)
+						?.filter((c) => {
+							if (user.admin) return true;
+							return c.teacher === user?.id;
+						})
 						?.map((c) => (
 							<option
 								key={c.id}
@@ -123,7 +126,7 @@ const StudentsTable: React.FC<StudentTableProps> = ({ students, onDelete }) => {
 					<Tbody>
 						{studentList
 							?.filter((s) => {
-								console.log({ s, user });
+								if (user.admin) return true;
 								return s.classes?.teacher === user?.id;
 							})
 							?.map((user) => (

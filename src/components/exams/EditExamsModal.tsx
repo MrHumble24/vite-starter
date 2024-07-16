@@ -109,7 +109,10 @@ const EditExamsModal: React.FC<EditExamsModalProps> = ({
 							<Select {...register("class")}>
 								<option value=''>Select Class</option>
 								{data
-									?.filter((item) => item.teacher === user?.id)
+									?.filter((item) => {
+										if (user.admin) return true;
+										return item.teacher === user?.id;
+									})
 									?.map((item) => (
 										<option
 											value={item.id}

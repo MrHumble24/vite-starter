@@ -117,6 +117,7 @@ const ClassesTable: React.FC<ClassesTableProps> = ({ classes }) => {
 					<Tbody>
 						{classesList
 							?.filter((c) => {
+								if (user.admin) return true;
 								return c.teacher === user?.id;
 							})
 							?.map((c) => (

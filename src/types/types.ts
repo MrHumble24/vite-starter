@@ -9,6 +9,7 @@ export type Teacher = {
 	phone: string | null;
 	role: string | null;
 	username: string | null;
+	admin: boolean;
 	profileImageUrl: string | null;
 
 	classes?:
