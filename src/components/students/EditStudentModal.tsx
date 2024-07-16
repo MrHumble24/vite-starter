@@ -26,6 +26,7 @@ import { useClasses } from "../../hooks/useClasses";
 import { ReloadPage } from "../../utils/reload";
 import { FaUser } from "react-icons/fa6";
 import { STUDENT_STORAGE_URL } from "../../constants/constants";
+import useUserStore from "../../hooks/login/useUserLogin";
 
 type EditStudentModalProps = {
 	isOpen: boolean;
@@ -43,7 +44,7 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({
 	const { register, handleSubmit, reset } = useForm<Students>({
 		defaultValues: defaultValues || {},
 	});
-
+	const user = useUserStore((s) => s.user);
 	const { data } = useClasses();
 	const toast = useToast();
 	const queryClient = useQueryClient();
@@ -171,14 +172,16 @@ const EditStudentModal: React.FC<EditStudentModalProps> = ({
 								<FormLabel>Class</FormLabel>
 								<Select {...register("class")}>
 									<option value=''>Select Class</option>
-									{data?.map((item) => (
-										<option
-											value={item.id}
-											key={item.id}
-										>
-											{item.name}
-										</option>
-									))}
+									{data
+										?.filter((item) => item.teacher === user?.id)
+										?.map((item) => (
+											<option
+												value={item.id}
+												key={item.id}
+											>
+												{item.name}
+											</option>
+										))}
 								</Select>
 							</FormControl>
 						)}

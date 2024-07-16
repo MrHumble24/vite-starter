@@ -23,6 +23,7 @@ import { supabase } from "../../api/supabase-client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useClasses } from "../../hooks/useClasses";
 import { ReloadPage } from "../../utils/reload";
+import useUserStore from "../../hooks/login/useUserLogin";
 
 const CreateStudent: React.FC = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,7 +32,7 @@ const CreateStudent: React.FC = () => {
 	const { data } = useClasses();
 	const { register, handleSubmit, reset } = useForm<Students>();
 	const [loading, setLoading] = useState(false);
-
+	const user = useUserStore((s) => s.user);
 	const submitForm = async (data: Students) => {
 		try {
 			setLoading(true);
@@ -105,14 +106,16 @@ const CreateStudent: React.FC = () => {
 									<FormLabel>Class</FormLabel>
 									<Select {...register("class")}>
 										<option value=''>Select Class</option>
-										{data?.map((item) => (
-											<option
-												value={item.id}
-												key={item.id}
-											>
-												{item.name}
-											</option>
-										))}
+										{data
+											?.filter((item) => item.teacher === user?.id)
+											?.map((item) => (
+												<option
+													value={item.id}
+													key={item.id}
+												>
+													{item.name}
+												</option>
+											))}
 									</Select>
 								</FormControl>
 								<FormControl>
